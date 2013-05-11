@@ -1,5 +1,5 @@
-RomanNumerals
-=============
+Roman Numerals
+==============
 
 Saturday afternoon pair programming kata session after pizza.
 
