@@ -1,19 +1,19 @@
 ﻿// ReSharper disable InconsistentNaming
 
-(function() {
+(function () {
 
     "use strict";
 
-    window.romanNumerals = function(num) {
+    window.romanNumerals = function (num) {
 
         var DECADE_DATA = [
-            ["I", "V", "X"],
-            ["X", "L", "C"],
-            ["C", "D", "M"],
-            ["M", "?", "?"]
+            ["III", "V", "X"],
+            ["XXX", "L", "C"],
+            ["CCC", "D", "M"],
+            ["MMM", "?", "?"]
         ];
 
-        var handleFirstDigit = function(numString) {
+        var handleFirstDigit = function (numString) {
 
             var result = "";
 
@@ -24,24 +24,19 @@
             var digit = Number(numString[0]);
 
             var dataForThisDecade = DECADE_DATA[numString.length - 1];
-            var unitChar = dataForThisDecade[0];
+            var oneChars = dataForThisDecade[0];
             var fiveChar = dataForThisDecade[1];
             var tenChar = dataForThisDecade[2];
-            var i;
 
             if (digit >= 1 && digit <= 3) {
-                for (i = 1; i <= digit; i++) {
-                    result += unitChar;
-                }
+                result += oneChars.substr(0, digit);
             } else if (digit === 4) {
-                result = unitChar + fiveChar;
+                result += oneChars[0] + fiveChar;
             } else if (digit >= 5 && digit <= 8) {
-                result = fiveChar;
-                for (i = 6; i <= digit; i++) {
-                    result += unitChar;
-                }
+                result += fiveChar;
+                result += oneChars.substr(0, digit - 5);
             } else if (digit === 9) {
-                result = unitChar + tenChar;
+                result += oneChars[0] + tenChar;
             }
 
             return result + handleFirstDigit(numString.substr(1));
@@ -53,4 +48,4 @@
 
         return handleFirstDigit(num.toString());
     };
-}());
+} ());
